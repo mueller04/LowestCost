@@ -27,20 +27,9 @@ public class Path {
         for (int column = 1; column < grid[0].length; column++) {
 
             for (int row = 0; row < grid.length; row++) {
-                int previousRowToAdd;
-                int previousRowToSubtract;
+                int previousRowToAdd = getPreviousRowToAdd(grid, row);
+                int previousRowToSubtract = getPreviousRowToSubtract(grid, row);
 
-                if (row == 0) {
-                    previousRowToSubtract = grid.length - 1;
-                } else {
-                    previousRowToSubtract = row;
-                }
-
-                if (row == grid.length - 1) {
-                    previousRowToAdd = 0;
-                } else {
-                    previousRowToAdd = row;
-                }
 
                 int upperLeft = gridPathTotals[previousRowToAdd + 1][column - 1];
                 int left = gridPathTotals[row][column -1];
@@ -52,6 +41,22 @@ public class Path {
             }
         }
         return gridPathTotals;
+    }
+
+    private static int getPreviousRowToSubtract(int[][] grid, int currentRow) {
+        if (currentRow == 0) {
+            return grid.length - 1;
+        } else {
+            return currentRow;
+        }
+    }
+
+    private static int getPreviousRowToAdd(int[][] grid, int currentRow) {
+        if (currentRow == grid.length - 1) {
+            return 0;
+        } else {
+            return currentRow;
+        }
     }
 
 
