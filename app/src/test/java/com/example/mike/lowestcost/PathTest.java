@@ -16,4 +16,18 @@ public class PathTest {
         //assert
         assertEquals(4, pathSumResult);
     }
+
+    @Test
+    public void lowestSumFoundFromTwoRows() {
+        //arrange
+        int[][] grid = {{1, 3},
+                        {2, 1}};
+
+        //act
+        int pathSumResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(2, pathSumResult);
+    }
+
 }
