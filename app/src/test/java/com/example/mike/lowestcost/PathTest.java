@@ -54,6 +54,7 @@ public class PathTest {
         assertEquals(false, pathResult.getIsValidColumns());
     }
 
+
     @Test
     public void moreThan100ColumnsNotAccepted() {
         //arrange
@@ -64,6 +65,18 @@ public class PathTest {
 
         //assert
         assertEquals(false, pathResult.getIsValidColumns());
+    }
+
+    @Test
+    public void onehundredColumnsAccepted() {
+        //arrange
+        int[][] grid = createGrid(5, 100);
+
+        //act
+        PathResult pathResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(true, pathResult.getIsValidColumns());
     }
 
 
