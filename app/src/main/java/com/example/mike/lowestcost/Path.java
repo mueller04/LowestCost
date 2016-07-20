@@ -71,18 +71,19 @@ public class Path {
             }
         }
 
-        boolean pathComplete = true;
-        int columnLength = grid[0].length - 1;
-        for (int row = 0; row < rowLength; row++) {
-            if (gridPathTotals[row][columnLength] == 0) {
-                pathComplete = false;
+        boolean ispathComplete = false;
+        if (!ispathComplete) {
+            for (int row = 0; row < rowLength; row++) {
+                if (isRowPathEnded[row] == false) {
+                    ispathComplete = true;
+                }
             }
         }
-        
+
 
 
         PathResult pathResult = new PathResult();
-        pathResult.setPathComplete(pathComplete);
+        pathResult.setPathComplete(ispathComplete);
         pathResult.setGridPathTotals(gridPathTotals);
         return pathResult;
     }

@@ -130,7 +130,7 @@ public class PathTest {
         PathResult pathResult = Path.navigate(grid);
 
         //assert
-        assertEquals(false, pathResult.getIsPathComplete());
+        assertEquals(true, pathResult.getIsPathComplete());
     }
 
 
