@@ -133,6 +133,23 @@ public class PathTest {
         assertEquals(true, pathResult.getIsPathComplete());
     }
 
+    @Test
+    public void getListOfRowsTraversedForLowestCost() {
+        //arrange
+        int[][] grid = {{4, 2, 1, 5, 5},
+                        {2, 2, 5, 1, 5},
+                        {8, 4, 5, 5, 1},
+                        {1, 8, 5, 5, 5}};
+        int[] expectedPathTaken = {3, 0, 0, 1, 2};
+
+        //act
+        PathResult pathSumResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(6, pathSumResult.getLeastCostSum());
+        assertArrayEquals(expectedPathTaken, pathSumResult.getPathTaken());
+    }
+
 
     //Test Methods
     public int[][] createGrid(int numRows, int numColumns) {
