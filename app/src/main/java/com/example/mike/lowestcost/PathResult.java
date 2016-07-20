@@ -3,15 +3,16 @@ package com.example.mike.lowestcost;
 public class PathResult {
 
     boolean isValidColumns;
+    boolean isValidRows;
     int leastCostSum;
 
-    public PathResult(boolean isValidColumns) {
-        this.isValidColumns = isValidColumns;
+    public PathResult() {
     }
 
     public PathResult(int leastCostSum) {
         this.leastCostSum = leastCostSum;
         isValidColumns = true;
+        isValidRows = true;
     }
 
     public boolean getIsValidColumns() {
@@ -22,12 +23,16 @@ public class PathResult {
         this.isValidColumns = isValidColumns;
     }
 
-    public int getLeastCostSum() {
-        return leastCostSum;
+    public boolean getIsValidRows() {
+        return isValidRows;
     }
 
-    public void setIsValidColumns(int leastCostSum) {
-        this.leastCostSum = leastCostSum;
+    public void setIsValidRows(boolean isValidColumns) {
+        this.isValidRows = isValidRows;
+    }
+
+    public int getLeastCostSum() {
+        return leastCostSum;
     }
 
 }

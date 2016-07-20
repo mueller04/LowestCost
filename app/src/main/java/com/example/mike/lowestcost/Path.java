@@ -4,9 +4,17 @@ public class Path {
 
     public static PathResult navigate(int[][] grid) {
 
+        if (grid.length > 10) {
+            boolean isValidRows = false;
+            PathResult pathResult = new PathResult();
+            pathResult.setIsValidRows(isValidRows);
+            return pathResult;
+        }
+
         if (grid[0].length < 5 || grid[0].length > 100) {
-            boolean isValidColumn = false;
-            PathResult pathResult = new PathResult(isValidColumn);
+            boolean isValidColumns = false;
+            PathResult pathResult = new PathResult();
+            pathResult.setIsValidColumns(isValidColumns);
             return pathResult;
         }
 
