@@ -7,6 +7,8 @@ public class PathResult {
     int leastCostSum;
 
     public PathResult() {
+        isValidColumns = true;
+        isValidRows = true;
     }
 
     public PathResult(int leastCostSum) {
@@ -27,7 +29,7 @@ public class PathResult {
         return isValidRows;
     }
 
-    public void setIsValidRows(boolean isValidColumns) {
+    public void setIsValidRows(boolean isValidRows) {
         this.isValidRows = isValidRows;
     }
 

@@ -100,7 +100,7 @@ public class PathTest {
         PathResult pathResult = Path.navigate(grid);
 
         //assert
-        assertEquals(false, pathResult.getIsValidRows());
+        assertEquals(true, pathResult.getIsValidRows());
     }
 
 
