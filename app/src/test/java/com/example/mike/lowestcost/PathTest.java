@@ -48,4 +48,19 @@ public class PathTest {
         assertEquals(1, pathSumResult);
     }
 
+    @Test
+    public void lowestSumFoundWithLowerWrapping() {
+        //arrange
+        int[][] grid = {{4, 2},
+                        {2, 2},
+                        {8, 4},
+                        {1, 0}};
+
+        //act
+        int pathSumResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(3, pathSumResult);
+    }
+
 }
