@@ -4,7 +4,7 @@ public class Path {
 
     public static PathResult navigate(int[][] grid) {
 
-        if (grid[0].length < 5) {
+        if (grid[0].length < 5 || grid[0].length > 100) {
             boolean isValidColumn = false;
             PathResult pathResult = new PathResult(isValidColumn);
             return pathResult;
