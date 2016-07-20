@@ -54,7 +54,7 @@ public class PathTest {
         int[][] grid = {{4, 2},
                         {2, 2},
                         {8, 4},
-                        {1, 0}};
+                        {1, 8}};
 
         //act
         int pathSumResult = Path.navigate(grid);

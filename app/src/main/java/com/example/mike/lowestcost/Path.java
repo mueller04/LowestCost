@@ -29,8 +29,7 @@ public class Path {
             for (int row = 0; row < grid.length; row++) {
                 int previousRowToAdd = getPreviousRowToAdd(grid, row);
                 int previousRowToSubtract = getPreviousRowToSubtract(grid, row);
-
-
+                
                 int upperLeft = gridPathTotals[previousRowToSubtract][column - 1];
                 int left = gridPathTotals[row][column -1];
                 int lowerLeft = gridPathTotals[previousRowToAdd][column - 1];
