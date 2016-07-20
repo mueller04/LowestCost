@@ -2,19 +2,25 @@ package com.example.mike.lowestcost;
 
 public class PathResult {
 
+    boolean isPathComplete;
     boolean isValidColumns;
     boolean isValidRows;
     int leastCostSum;
 
+    int[][] gridPathTotals;
+
     public PathResult() {
         isValidColumns = true;
         isValidRows = true;
+        isPathComplete = true;
     }
 
-    public PathResult(int leastCostSum) {
-        this.leastCostSum = leastCostSum;
-        isValidColumns = true;
-        isValidRows = true;
+    public boolean getIsPathComplete() {
+        return isPathComplete;
+    }
+
+    public void setPathComplete(boolean isPathComplete) {
+        this.isPathComplete = isPathComplete;
     }
 
     public boolean getIsValidColumns() {
@@ -35,6 +41,18 @@ public class PathResult {
 
     public int getLeastCostSum() {
         return leastCostSum;
+    }
+
+    public void setLeastCostSum(int leastCostSum) {
+        this.leastCostSum = leastCostSum;
+    }
+
+    public int[][] getGridPathTotals() {
+        return gridPathTotals;
+    }
+
+    public void setGridPathTotals(int[][] gridPathTotals) {
+        this.gridPathTotals = gridPathTotals;
     }
 
 }

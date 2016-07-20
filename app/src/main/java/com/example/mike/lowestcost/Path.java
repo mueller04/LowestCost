@@ -18,7 +18,8 @@ public class Path {
             return pathResult;
         }
 
-        int[][] gridPathTotals = pathTotals(grid);
+        PathResult pathResult = pathTotals(grid);
+        int[][] gridPathTotals = pathResult.getGridPathTotals();
         int columnLength = grid[0].length - 1;
         int leastCostSum = gridPathTotals[0][columnLength];
 
@@ -27,12 +28,18 @@ public class Path {
                 leastCostSum = gridPathTotals[i][columnLength];
             }
         }
-        PathResult pathResult = new PathResult(leastCostSum);
+
+        pathResult.setLeastCostSum(leastCostSum);
         return pathResult;
     }
 
-    public static int[][] pathTotals (int[][] grid) {
+    public static PathResult pathTotals (int[][] grid) {
         int[][] gridPathTotals = new int[grid.length][grid[0].length];
+        int rowLength = grid.length;
+        boolean[] isRowPathEnded = new boolean[rowLength];
+        for (int i = 0; i < rowLength; i++) {
+            isRowPathEnded[i] = false;
+        }
 
         //populate the first column
         for (int i = 0; i < grid.length; i++) {
@@ -41,20 +48,41 @@ public class Path {
 
         for (int column = 1; column < grid[0].length; column++) {
 
-            for (int row = 0; row < grid.length; row++) {
-                int previousRowToAdd = getPreviousRowToAdd(grid, row);
-                int previousRowToSubtract = getPreviousRowToSubtract(grid, row);
-                
-                int upperLeft = gridPathTotals[previousRowToSubtract][column - 1];
-                int left = gridPathTotals[row][column -1];
-                int lowerLeft = gridPathTotals[previousRowToAdd][column - 1];
+            for (int row = 0; row < rowLength; row++) {
 
-                int lowestCellValue = Math.min(upperLeft ,Math.min(left, lowerLeft));
+                if (isRowPathEnded[row] == false) {
+                    int previousRowToAdd = getPreviousRowToAdd(grid, row);
+                    int previousRowToSubtract = getPreviousRowToSubtract(grid, row);
 
-                gridPathTotals[row][column] = lowestCellValue + grid[row][column];
+                    int upperLeft = gridPathTotals[previousRowToSubtract][column - 1];
+                    int left = gridPathTotals[row][column -1];
+                    int lowerLeft = gridPathTotals[previousRowToAdd][column - 1];
+
+                    int lowestCellValue = Math.min(upperLeft ,Math.min(left, lowerLeft));
+
+                    int tentativePathTotal = lowestCellValue + grid[row][column];
+
+                    if (tentativePathTotal <= 50) {
+                        gridPathTotals[row][column] = tentativePathTotal;
+                    } else {
+                        isRowPathEnded[row] = true;
+                    }
+                }
             }
         }
-        return gridPathTotals;
+
+        boolean pathComplete = true;
+        int columnLength = grid[0].length - 1;
+        for (int row = 0; row < rowLength; row++) {
+            if (gridPathTotals[row][columnLength] == 0) {
+                pathComplete = false;
+            }
+        }
+
+        PathResult pathResult = new PathResult();
+        pathResult.setPathComplete(pathComplete);
+        pathResult.setGridPathTotals(gridPathTotals);
+        return pathResult;
     }
 
     private static int getPreviousRowToSubtract(int[][] grid, int currentRow) {
