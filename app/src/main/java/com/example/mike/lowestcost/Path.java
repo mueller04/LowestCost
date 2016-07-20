@@ -2,7 +2,13 @@ package com.example.mike.lowestcost;
 
 public class Path {
 
-    public static int navigate(int[][] grid) {
+    public static PathResult navigate(int[][] grid) {
+
+        if (grid[0].length < 5) {
+            boolean isValidColumn = false;
+            PathResult pathResult = new PathResult(isValidColumn);
+            return pathResult;
+        }
 
         int[][] gridPathTotals = pathTotals(grid);
         int columnLength = grid[0].length - 1;
@@ -13,7 +19,8 @@ public class Path {
                 leastCostSum = gridPathTotals[i][columnLength];
             }
         }
-        return leastCostSum;
+        PathResult pathResult = new PathResult(leastCostSum);
+        return pathResult;
     }
 
     public static int[][] pathTotals (int[][] grid) {
