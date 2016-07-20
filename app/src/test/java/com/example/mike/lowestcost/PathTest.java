@@ -78,4 +78,19 @@ public class PathTest {
         assertEquals(4, pathSumResult);
     }
 
+    @Test
+    public void lessThan5ColumnsNotAccepted() {
+        //arrange
+        int[][] grid = {{4, 2, 2},
+                        {2, 2, 1},
+                        {8, 4, 5},
+                        {1, 8, 3}};
+
+        //act
+        PathSumResult pathSumResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(false, pathSumResult.getIsValidColumns());
+    }
+
 }
