@@ -33,4 +33,19 @@ public class PathTest {
         assertEquals(1, pathSumResult);
     }
 
+    @Test
+    public void lowestSumFoundWithUpperWrapping() {
+        //arrange
+        int[][] grid = {{1, 3},
+                        {2, 2},
+                        {8, 2},
+                        {7, 0}};
+
+        //act
+        int pathSumResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(1, pathSumResult);
+    }
+
 }

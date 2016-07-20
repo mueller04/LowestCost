@@ -20,7 +20,7 @@ public class Path {
         int[][] gridPathTotals = new int[grid.length][grid[0].length];
 
         //populate the first column
-        for (int i = 0; i < grid[0].length; i++) {
+        for (int i = 0; i < grid.length; i++) {
             gridPathTotals[i][0] = grid[i][0];
         }
 
@@ -31,9 +31,9 @@ public class Path {
                 int previousRowToSubtract = getPreviousRowToSubtract(grid, row);
 
 
-                int upperLeft = gridPathTotals[previousRowToAdd + 1][column - 1];
+                int upperLeft = gridPathTotals[previousRowToSubtract][column - 1];
                 int left = gridPathTotals[row][column -1];
-                int lowerLeft = gridPathTotals[previousRowToSubtract - 1][column - 1];
+                int lowerLeft = gridPathTotals[previousRowToAdd][column - 1];
 
                 int lowestCellValue = Math.min(upperLeft ,Math.min(left, lowerLeft));
 
@@ -47,7 +47,7 @@ public class Path {
         if (currentRow == 0) {
             return grid.length - 1;
         } else {
-            return currentRow;
+            return currentRow - 1;
         }
     }
 
@@ -55,7 +55,7 @@ public class Path {
         if (currentRow == grid.length - 1) {
             return 0;
         } else {
-            return currentRow;
+            return currentRow + 1;
         }
     }
 
