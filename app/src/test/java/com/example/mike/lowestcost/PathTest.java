@@ -63,4 +63,19 @@ public class PathTest {
         assertEquals(3, pathSumResult);
     }
 
+    @Test
+    public void lowestSumFoundWith3Columns() {
+        //arrange
+        int[][] grid = {{4, 2, 2},
+                        {2, 2, 1},
+                        {8, 4, 5},
+                        {1, 8, 3}};
+
+        //act
+        int pathSumResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(4, pathSumResult);
+    }
+
 }
