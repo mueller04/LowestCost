@@ -91,6 +91,18 @@ public class PathTest {
         assertEquals(false, pathResult.getIsValidRows());
     }
 
+    @Test
+    public void tenRowsAccepted() {
+        //arrange
+        int[][] grid = createGrid(10, 5);
+
+        //act
+        PathResult pathResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(false, pathResult.getIsValidRows());
+    }
+
 
     //Test Methods
     public int[][] createGrid(int numRows, int numColumns) {
