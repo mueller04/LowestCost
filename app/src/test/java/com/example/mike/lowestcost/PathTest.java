@@ -2,6 +2,8 @@ package com.example.mike.lowestcost;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.*;
 
 public class PathTest {
@@ -50,6 +52,33 @@ public class PathTest {
 
         //assert
         assertEquals(false, pathResult.getIsValidColumns());
+    }
+
+    @Test
+    public void moreThan100ColumnsNotAccepted() {
+        //arrange
+        int[][] grid = createGrid(5, 101);
+
+        //act
+        PathResult pathResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(false, pathResult.getIsValidColumns());
+    }
+
+
+    //Test Methods
+    public int[][] createGrid(int numRows, int numColumns) {
+        int[][] grid = new int[numRows][numColumns];
+        Random random = new Random();
+
+        for (int row = 0; row < numRows; row++) {
+            for (int column = 0; column < numColumns; column++) {
+                int randomInt = random.nextInt();
+                grid[row][column] = randomInt;
+            }
+        }
+        return grid;
     }
 
 }

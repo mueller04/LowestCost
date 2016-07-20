@@ -11,6 +11,7 @@ public class PathResult {
 
     public PathResult(int leastCostSum) {
         this.leastCostSum = leastCostSum;
+        isValidColumns = true;
     }
 
     public boolean getIsValidColumns() {
