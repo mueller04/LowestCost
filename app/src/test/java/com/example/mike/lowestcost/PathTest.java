@@ -118,6 +118,21 @@ public class PathTest {
         assertEquals(false, pathResult.getIsPathComplete());
     }
 
+    @Test
+    public void trueIfAtLeast1PathCompleted() {
+        //arrange
+        int[][] grid = {{10, 39, 2, 1, 9},
+                        {10, 39, 2, 5, 9},
+                        {1, 10, 5, 1, 9},
+                        {10, 39, 2, 5, 9}};
+
+        //act
+        PathResult pathResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(false, pathResult.getIsPathComplete());
+    }
+
 
     //Test Methods
     public int[][] createGrid(int numRows, int numColumns) {

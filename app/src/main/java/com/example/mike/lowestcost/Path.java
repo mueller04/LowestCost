@@ -78,6 +78,8 @@ public class Path {
                 pathComplete = false;
             }
         }
+        
+
 
         PathResult pathResult = new PathResult();
         pathResult.setPathComplete(pathComplete);
