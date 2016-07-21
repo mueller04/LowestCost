@@ -150,6 +150,22 @@ public class PathTest {
         assertArrayEquals(expectedPathTaken, pathSumResult.getPathTaken());
     }
 
+    @Test
+    public void getOutPutTextForPathCompleted() {
+        //arrange
+        int[][] grid = {{4, 2, 1, 5, 5},
+                        {2, 2, 5, 1, 5},
+                        {8, 4, 5, 5, 1},
+                        {1, 8, 5, 5, 5}};
+        String expected = "Yes\n6\n3 0 0 1 2";
+
+        //act
+        PathResult pathResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(expected, pathResult.toString());
+    }
+
 
     //Test Methods
     public int[][] createGrid(int numRows, int numColumns) {
