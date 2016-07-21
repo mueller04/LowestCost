@@ -65,4 +65,21 @@ public class PathResult {
         this.pathTaken = pathTaken;
     }
 
+    @Override
+    public String toString() {
+
+        int[] pathTaken = getPathTaken();
+        String pathTakenString = "";
+
+        for (int i = 0; i < pathTaken.length; i++) {
+            pathTakenString += String.valueOf(pathTaken[i]);
+
+            if (i < pathTaken.length - 1) {
+                pathTakenString += " ";
+            }
+        }
+
+        return "Yes" + "\n" + getLeastCostSum() + "\n" + pathTakenString;
+    }
+
 }
