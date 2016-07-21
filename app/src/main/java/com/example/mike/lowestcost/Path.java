@@ -13,7 +13,7 @@ public class Path {
             return pathResult;
         }
 
-        pathResult = pathTotals(grid);
+        pathResult = pathTotals(grid, rowLength, columnLength);
         int[][] gridPathTotals = pathResult.getGridPathTotals();
 
         pathResult = getPathResultForGrid(gridPathTotals, rowLength, columnLength, pathResult);
@@ -21,10 +21,8 @@ public class Path {
         return pathResult;
     }
 
-    public static PathResult pathTotals (int[][] grid) {
-        int[][] gridPathTotals = new int[grid.length][grid[0].length];
-        int rowLength = grid.length;
-        int columnLength = grid[0].length;
+    public static PathResult pathTotals (int[][] grid, int rowLength, int columnLength) {
+        int[][] gridPathTotals = new int[rowLength][columnLength];
 
         boolean[] isRowPathEnded = initializeRowBoolForEachRow(rowLength);
 
@@ -58,10 +56,10 @@ public class Path {
             }
         }
 
-        boolean ispathComplete = oneOrMorePathsCompleted(isRowPathEnded, rowLength);
+        boolean isPathComplete = oneOrMorePathsCompleted(isRowPathEnded, rowLength);
 
         PathResult pathResult = new PathResult();
-        pathResult.setPathComplete(ispathComplete);
+        pathResult.setPathComplete(isPathComplete);
         pathResult.setGridPathTotals(gridPathTotals);
         return pathResult;
     }
