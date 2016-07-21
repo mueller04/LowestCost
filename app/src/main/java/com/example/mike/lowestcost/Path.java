@@ -16,9 +16,8 @@ public class Path {
         pathResult = pathTotals(grid);
         int[][] gridPathTotals = pathResult.getGridPathTotals();
 
-        int leastCostSumForGrid = getLeastPathSumForGrid(gridPathTotals, rowLength, columnLength);
+        pathResult = getPathResultForGrid(gridPathTotals, rowLength, columnLength, pathResult);
 
-        pathResult.setLeastCostSum(leastCostSumForGrid);
         return pathResult;
     }
 
@@ -119,17 +118,64 @@ public class Path {
         return pathResult;
     }
 
-    private static int getLeastPathSumForGrid(int[][] gridPathTotals, int rowLength, int columnLength) {
+    private static PathResult getPathResultForGrid(int[][] gridPathTotals, int rowLength, int columnLength, PathResult pathResult) {
         int leastCostSumForRow = gridPathTotals[0][columnLength - 1];
         int leastCostSumForGrid = leastCostSumForRow;
+        int finalRowOfLowestCostPath = 0;
 
         for (int row = 1; row < rowLength; row++) {
             if (gridPathTotals[row][columnLength - 1] < leastCostSumForRow) {
                 leastCostSumForGrid = gridPathTotals[row][columnLength - 1];
+                finalRowOfLowestCostPath = row;
             }
         }
-        return leastCostSumForGrid;
+        int[] pathTaken = getPathTakenForLowestCostPath(finalRowOfLowestCostPath, gridPathTotals, rowLength, columnLength);
+
+        pathResult.setLeastCostSum(leastCostSumForGrid);
+        pathResult.setPathTaken(pathTaken);
+
+        return pathResult;
     }
 
+    private static int[] getPathTakenForLowestCostPath(int finalRowOfLowestCostPath, int[][] gridPathTotals, int rowLength, int columnLength) {
+        int[] pathTaken = new int[columnLength];
 
+        int nextRow = finalRowOfLowestCostPath;
+
+        pathTaken[columnLength - 1] = finalRowOfLowestCostPath;
+        for (int column = columnLength - 2; column >= 0; column--) {
+            nextRow = backTrackThroughGridToUpdatePathTaken(nextRow, column, gridPathTotals, pathTaken);
+        }
+        return pathTaken;
+    }
+
+    private static int backTrackThroughGridToUpdatePathTaken(int currentRow, int column, int[][] gridPathTotals, int[] pathTaken) {
+        int row = currentRow;
+
+        int previousRowToAdd = getPreviousRowToAdd(gridPathTotals, row);
+        int previousRowToSubtract = getPreviousRowToSubtract(gridPathTotals, row);
+
+        int upperLeft = gridPathTotals[previousRowToSubtract][column];
+        int upperLeftCellRow = previousRowToSubtract;
+
+        int left = gridPathTotals[row][column];
+        int leftCellRow = row;
+
+        int lowerLeft = gridPathTotals[previousRowToAdd][column];
+        int lowerLeftCellRow = previousRowToAdd;
+
+        int lowestCellValue = Math.min(upperLeft, Math.min(left, lowerLeft));
+
+        if (lowestCellValue == upperLeft) {
+            currentRow = upperLeftCellRow;
+        } else if (lowestCellValue == left) {
+            currentRow = leftCellRow;
+
+        } else if (lowestCellValue == lowerLeft) {
+            currentRow = lowerLeftCellRow;
+        }
+
+        pathTaken[column] = currentRow;
+        return currentRow;
+    }
 }

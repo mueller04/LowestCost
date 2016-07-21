@@ -9,6 +9,8 @@ public class PathResult {
 
     int[][] gridPathTotals;
 
+    int[] pathTaken;
+
     public PathResult() {
         isValidColumns = true;
         isValidRows = true;
@@ -53,6 +55,14 @@ public class PathResult {
 
     public void setGridPathTotals(int[][] gridPathTotals) {
         this.gridPathTotals = gridPathTotals;
+    }
+
+    public int[] getPathTaken() {
+        return pathTaken;
+    }
+
+    public void setPathTaken(int[] pathTaken) {
+        this.pathTaken = pathTaken;
     }
 
 }
