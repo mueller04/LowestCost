@@ -117,17 +117,32 @@ public class Path {
     }
 
     private static PathResult getPathResultForGrid(int[][] gridPathTotals, int rowLength, int columnLength, PathResult pathResult) {
-        int leastCostSumForRow = gridPathTotals[0][columnLength - 1];
-        int leastCostSumForGrid = leastCostSumForRow;
+        int leastCostSumForGrid = gridPathTotals[0][columnLength - 1];
         int finalRowOfLowestCostPath = 0;
+        int columnOfLastLowestCostValue = columnLength - 1;
 
-        for (int row = 1; row < rowLength; row++) {
-            if (gridPathTotals[row][columnLength - 1] < leastCostSumForRow) {
-                leastCostSumForGrid = gridPathTotals[row][columnLength - 1];
-                finalRowOfLowestCostPath = row;
+        int column = columnLength - 1;
+
+        do {
+
+            for (int row = 0; row < rowLength; row++) {
+                int nextSumForRow = gridPathTotals[row][column];
+                if (nextSumForRow < leastCostSumForGrid) {
+                    leastCostSumForGrid = nextSumForRow;
+                    finalRowOfLowestCostPath = row;
+                    columnOfLastLowestCostValue = column;
+
+                } else if (leastCostSumForGrid == 0 && nextSumForRow != 0 && nextSumForRow <= 50) {
+                    leastCostSumForGrid = nextSumForRow;
+                    finalRowOfLowestCostPath = row;
+                    columnOfLastLowestCostValue = column;
+                }
             }
-        }
-        int[] pathTaken = getPathTakenForLowestCostPath(finalRowOfLowestCostPath, gridPathTotals, rowLength, columnLength);
+
+        column--;
+        } while (leastCostSumForGrid == 0 && column >= 0);
+
+        int[] pathTaken = getPathTakenForLowestCostPath(finalRowOfLowestCostPath, gridPathTotals, rowLength, columnOfLastLowestCostValue);
 
         pathResult.setLeastCostSum(leastCostSumForGrid);
         pathResult.setPathTaken(pathTaken);
@@ -135,13 +150,13 @@ public class Path {
         return pathResult;
     }
 
-    private static int[] getPathTakenForLowestCostPath(int finalRowOfLowestCostPath, int[][] gridPathTotals, int rowLength, int columnLength) {
-        int[] pathTaken = new int[columnLength];
+    private static int[] getPathTakenForLowestCostPath(int finalRowOfLowestCostPath, int[][] gridPathTotals, int rowLength, int columnOfLastLowestCostValue) {
+        int[] pathTaken = new int[columnOfLastLowestCostValue + 1];
 
         int nextRow = finalRowOfLowestCostPath;
 
-        pathTaken[columnLength - 1] = finalRowOfLowestCostPath;
-        for (int column = columnLength - 2; column >= 0; column--) {
+        pathTaken[columnOfLastLowestCostValue] = finalRowOfLowestCostPath;
+        for (int column = columnOfLastLowestCostValue - 1; column >= 0; column--) {
             nextRow = backTrackThroughGridToUpdatePathTaken(nextRow, column, gridPathTotals, pathTaken);
         }
         return pathTaken;

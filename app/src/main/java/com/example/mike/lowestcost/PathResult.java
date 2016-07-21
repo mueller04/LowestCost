@@ -79,9 +79,14 @@ public class PathResult {
             }
         }
 
+        String pathCompleteString;
+        if (isPathComplete) {
+            pathCompleteString = "Yes";
+        } else {
+            pathCompleteString = "No";
+        }
 
-
-        return "Yes" + "\n" + getLeastCostSum() + "\n" + pathTakenString;
+        return pathCompleteString + "\n" + getLeastCostSum() + "\n" + pathTakenString;
     }
 
 }

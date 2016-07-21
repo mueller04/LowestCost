@@ -169,11 +169,11 @@ public class PathTest {
     @Test
     public void getOutPutTextForPathNotCompleted() {
         //arrange
-        int[][] grid = {{10, 39, 2, 1, 9},
-                        {9, 39, 2, 5, 9},
-                        {10, 39, 2, 5, 9},
-                        {10, 39, 2, 5, 9}};
-        String expected = "No\n48\n0 1";
+        int[][] grid = {{10, 39, 3, 1, 9},
+                        {9, 39, 3, 5, 9},
+                        {10, 39, 3, 5, 9},
+                        {10, 39, 3, 5, 9}};
+        String expected = "No\n48\n1 0";
 
         //act
         PathResult pathResult = Path.navigate(grid);
