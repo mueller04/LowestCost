@@ -166,6 +166,22 @@ public class PathTest {
         assertEquals(expected, pathResult.toString());
     }
 
+    @Test
+    public void getOutPutTextForPathNotCompleted() {
+        //arrange
+        int[][] grid = {{10, 39, 2, 1, 9},
+                        {9, 39, 2, 5, 9},
+                        {10, 39, 2, 5, 9},
+                        {10, 39, 2, 5, 9}};
+        String expected = "No\n48\n0 1";
+
+        //act
+        PathResult pathResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(expected, pathResult.toString());
+    }
+
 
     //Test Methods
     public int[][] createGrid(int numRows, int numColumns) {
