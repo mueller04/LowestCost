@@ -182,6 +182,22 @@ public class PathTest {
         assertEquals(expected, pathResult.toString());
     }
 
+    @Test
+    public void getOutPutTextForPathCompletedNegativeNumbers() {
+        //arrange
+        int[][] grid = {{4, 2, 1, 5, 5},
+                        {2, 2, -5, 5, 5},
+                        {8, -1, 5, 2, 4},
+                        {1, 8, 5, 5, 5}};
+        String expected = "Yes\n1\n3 2 1 2 2";
+
+        //act
+        PathResult pathResult = Path.navigate(grid);
+
+        //assert
+        assertEquals(expected, pathResult.toString());
+    }
+
 
     //Test Methods
     public int[][] createGrid(int numRows, int numColumns) {
